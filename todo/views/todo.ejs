@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>todoApp</title>
+    <link rel="stylesheet" href="assets/reset.min.css">
+    <link rel="stylesheet" href="assets/style.css">
+    <!--引入jquery-->
+    <script src="https://cdn.bootcss.com/jquery/3.4.0/jquery.min.js"></script>
+</head>
+<body>
+    <header>
+        <form>
+            <input type="text" placeholder="Enter an activity..." name="item" id="item">
+            <button type="submit" id="add">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"viewBox="0 0 16 16" style="enable-background:new 0 0 16 16;" xml:space="preserve"><g><path class="fill" d="M16,8c0,0.5-0.5,1-1,1H9v6c0,0.5-0.5,1-1,1s-1-0.5-1-1V9H1C0.5,9,0,8.5,0,8s0.5-1,1-1h6V1c0-0.5,0.5-1,1-1s1,0.5,1,1v6h6C15.5,7,16,7.5,16,8z"/></g></svg>
+            </button>
+        </form>
+    </header>
+
+    <div class="container">
+        <!--未完成列表-->
+        <ul class="todo" id="todo">
+            <!--动态添加数据-->
+            <% todos.unfinish.forEach((val,ind) => {%>
+                <li>
+                    <%= val.item%>
+                    <div class="buttons">
+                        <button class="remove">
+                            <svg t="1556521793477" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2483" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><defs><style type="text/css"></style></defs><path class="fill" d="M412 744c-19.8 0-36-16.2-36-36V500c0-19.8 16.2-36 36-36s36 16.2 36 36v208c0 19.8-16.2 36-36 36zM612 744c-19.8 0-36-16.2-36-36V500c0-19.8 16.2-36 36-36s36 16.2 36 36v208c0 19.8-16.2 36-36 36z" p-id="2484"></path><path class="fill" d="M923.8 248H736v-82c0-56.2-45.8-102-102-102H390c-56.2 0-102 45.8-102 102v82H100.2C80.3 248 64 264.2 64 284s16.3 36 36.2 36H192v518c0 16.4 3.2 32.4 9.6 47.5 6.1 14.5 14.9 27.6 26.1 38.8 11.2 11.2 24.2 20 38.8 26.1 15.1 6.4 31.1 9.6 47.5 9.6h396c16.4 0 32.4-3.2 47.5-9.6 14.5-6.1 27.6-14.9 38.8-26.1 11.2-11.2 20-24.2 26.1-38.8 6.4-15.1 9.6-31.1 9.6-47.5V320h91.8c19.9 0 36.2-16.2 36.2-36s-16.3-36-36.2-36zM360 166c0-16.6 13.4-30 30-30h244c16.6 0 30 13.4 30 30v82H360v-82z m400 672c0 27.6-22.4 50-50 50H314c-27.6 0-50-22.4-50-50V320h496v518z" p-id="2485"></path></svg>
+                        </button>
+                        <button class="complete">
+                            <svg t="1556526475868" viewBox="0 0 1879 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4164" xmlns:xlink="http://www.w3.org/1999/xlink" width="366.9921875" height="200"><defs><style type="text/css"></style></defs><path class="fill" d="M801.590751 981.530636c-19.384971 0-38.030058-7.250867-52.087861-20.420809L348.337572 587.024277c-30.039306-27.96763-31.075145-74.43237-2.36763-103.731791s76.504046-30.187283 106.543353-2.219654L795.079769 800.554913 1416.434682 65.257803c26.487861-31.223121 73.988439-35.810405 106.099422-10.062427 32.110983 25.747977 36.698266 71.916763 10.358382 103.287861L859.893642 954.894798c-13.317919 15.833526-32.850867 25.452023-53.715607 26.635838h-4.587284z" class="fill" p-id="4165"></path></svg>
+                        </button>
+                    </div>
+                </li>
+            <% })%>
+        </ul>
+        <!--已完成列表-->
+        <ul class="todo" id="completed">
+            <!--动态获取数据-->
+            <% todos.finish.forEach((val,ind) => {%>
+            <li>
+                <%= val.item%>
+                <div class="buttons">
+                    <button class="remove">
+                        <svg t="1556521793477" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2483" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><defs><style type="text/css"></style></defs><path class="fill" d="M412 744c-19.8 0-36-16.2-36-36V500c0-19.8 16.2-36 36-36s36 16.2 36 36v208c0 19.8-16.2 36-36 36zM612 744c-19.8 0-36-16.2-36-36V500c0-19.8 16.2-36 36-36s36 16.2 36 36v208c0 19.8-16.2 36-36 36z" p-id="2484"></path><path class="fill" d="M923.8 248H736v-82c0-56.2-45.8-102-102-102H390c-56.2 0-102 45.8-102 102v82H100.2C80.3 248 64 264.2 64 284s16.3 36 36.2 36H192v518c0 16.4 3.2 32.4 9.6 47.5 6.1 14.5 14.9 27.6 26.1 38.8 11.2 11.2 24.2 20 38.8 26.1 15.1 6.4 31.1 9.6 47.5 9.6h396c16.4 0 32.4-3.2 47.5-9.6 14.5-6.1 27.6-14.9 38.8-26.1 11.2-11.2 20-24.2 26.1-38.8 6.4-15.1 9.6-31.1 9.6-47.5V320h91.8c19.9 0 36.2-16.2 36.2-36s-16.3-36-36.2-36zM360 166c0-16.6 13.4-30 30-30h244c16.6 0 30 13.4 30 30v82H360v-82z m400 672c0 27.6-22.4 50-50 50H314c-27.6 0-50-22.4-50-50V320h496v518z" p-id="2485"></path></svg>
+                    </button>
+                    <button class="complete">
+                        <svg t="1556526475868" viewBox="0 0 1879 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4164" xmlns:xlink="http://www.w3.org/1999/xlink" width="366.9921875" height="200"><defs><style type="text/css"></style></defs><path class="fill" d="M801.590751 981.530636c-19.384971 0-38.030058-7.250867-52.087861-20.420809L348.337572 587.024277c-30.039306-27.96763-31.075145-74.43237-2.36763-103.731791s76.504046-30.187283 106.543353-2.219654L795.079769 800.554913 1416.434682 65.257803c26.487861-31.223121 73.988439-35.810405 106.099422-10.062427 32.110983 25.747977 36.698266 71.916763 10.358382 103.287861L859.893642 954.894798c-13.317919 15.833526-32.850867 25.452023-53.715607 26.635838h-4.587284z" class="fill" p-id="4165"></path></svg>
+                    </button>
+                </div>
+            </li>
+            <% })%>
+        </ul>
+    </div>
+</body>
+<script>
+$(document).ready(function () {
+    //添加数据
+    $('header').on('submit',function () {
+        let item = $('form input');
+        let todo = {item:item.val()};
+        if(todo.item == ""){
+            alert('内容不能为空，请重新输入！');
+            return false;
+        }
+
+        //发送数据
+        $.ajax({
+            type:'post',
+            url:'/todo',
+            data:todo,
+            success:function(data){
+                //coding...
+            }
+        })
+     })
+
+     //删除数据(未完成数据)
+     $('#todo .remove').on('click',function () {
+         //$.trim() 函数用于去除字符串两端的空白字符
+         let item = $.trim($(this).parents('li').text());
+         $.ajax({
+             type:'delete',
+             url:'/todo/'+ item,
+             success:function(data){
+                location.reload();
+            }
+         })
+      })
+
+      //删除已完成数据
+      $('#completed .remove').on('click',function () {
+         //$.trim() 函数用于去除字符串两端的空白字符
+         let item = $.trim($(this).parents('li').text());
+         $.ajax({
+             type:'delete',
+             url:'/todoFinish/'+ item,
+             success:function(data){
+                location.reload();
+            }
+         })
+      })
+
+
+      //点击取消完成目标
+      $('#completed .complete').on('click',function(){
+        let item = $.trim($(this).parents('li').text());
+        let todo = {item:item}
+        $.ajax({
+            type:'post',
+            url:'/todo/unfinish',
+            data:todo,
+            success:function(data){
+                //coding
+                location.reload();
+            }
+        })
+      })
+
+      //点击完成目标
+      $('#todo .complete').on('click',function(){
+        let item = $.trim($(this).parents('li').text());
+        let todo = {item:item}
+        $.ajax({
+            type:'post',
+            url:'/todo/finish',
+            data:todo,
+            success:function(data){
+                //coding
+                location.reload();
+            }
+        })
+      })
+ })
+</script>
+</html>
